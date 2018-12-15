@@ -11,13 +11,9 @@ namespace LC3 {
             }
         }
 
-        public ushort Get(ushort location) {
-            return _memory[location];
-        }
+        public ushort Get(ushort location) => _memory[location];
 
-        public void Put(ushort location, ushort value) {
-            _memory[location] = value;
-        }
+        public void Put(ushort location, ushort value) => _memory[location] = value;
 
         public ushort this[ushort key] {
             get => Get(key);

@@ -10,5 +10,7 @@ namespace LC3 {
         R7 = 7,
         ProgramCounter = 8,
         Flag = 9,
+        MemoryAddress = 10,
+        MemoryData = 11,
     }
 }
