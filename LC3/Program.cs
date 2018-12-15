@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -13,24 +14,29 @@ namespace LC3 {
             }
         }
 
+        private static IEnumerable<ushort> GetShorts(byte[] bytes) {
+            return bytes.InSetsOf(2)
+                .Select(i => {
+                    i.Reverse();
+                    return BitConverter.ToUInt16(i.ToArray());
+                });
+        }
         private static void Start(byte[] bytes) {
             var proc = new Processor();
+            var data = GetShorts(bytes).ToArray();
             
-            var originBytes = bytes.Take(2);
-            if (BitConverter.IsLittleEndian)
-                originBytes = originBytes.Reverse();
-
-            ushort origin = BitConverter.ToUInt16(originBytes.ToArray());
+            var origin = data[0];
 
             Debug.WriteLine($"Origin: {origin}");
-            var payload = bytes.Skip(2).ToArray();
+            var payload = data.Skip(1).ToArray();
             for (ushort i = 0; i < payload.Length; i++) {
                 var location = (ushort) (origin + i);
                 proc.Memory.Put(location, payload[i]);
             }
 
             proc[Register.ProgramCounter] = origin;
-            proc.Fetch();
+            var instruction = proc.Fetch();
+            proc.Decode(instruction);
         }
     }
 }

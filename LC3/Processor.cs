@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace LC3 {
     public class Processor {
         private ushort[] _registers = new ushort[12];
@@ -13,7 +15,7 @@ namespace LC3 {
         }
         
         public ushort this[Register key] {
-            get => this[(int)key)];
+            get => this[(int)key];
             set => this[(int)key] = value;
         }
 
@@ -21,11 +23,16 @@ namespace LC3 {
             this[register]++;
         }
 
-        public void Fetch() {
+        public ushort Fetch() {
             this[Register.MemoryAddress] = this[Register.ProgramCounter];
             Increment(Register.ProgramCounter);
             this[Register.MemoryData] = Memory[this[Register.MemoryAddress]];
-            var instruction = this[Register.MemoryData];
+            return this[Register.MemoryData];
+        }
+
+        public void Decode(ushort instruction) {
+            var opcode = instruction >> 12;
+            Debug.WriteLine(opcode);
         }
     }
 }
