@@ -1,3 +1,4 @@
+// ReSharper disable InconsistentNaming
 namespace LC3 {
     public enum Register {
         R0 = 0,
@@ -8,7 +9,7 @@ namespace LC3 {
         R5 = 5,
         R6 = 6,
         R7 = 7,
-        ProgramCounter = 8,
+        PC = 8,
         Flag = 9,
         MemoryAddress = 10,
         MemoryData = 11,

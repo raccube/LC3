@@ -34,9 +34,13 @@ namespace LC3 {
                 proc.Memory.Put(location, payload[i]);
             }
 
-            proc[Register.ProgramCounter] = origin;
-            var instruction = proc.Fetch();
-            proc.Decode(instruction);
+            proc[Register.PC] = origin;
+
+            while (true) {
+                // Fetch & Execute
+                proc.Decode(proc.Fetch()).Call(proc);
+            }
+            
         }
     }
 }
