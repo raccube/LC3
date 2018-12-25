@@ -8,7 +8,8 @@ namespace LC3 {
     internal static class Program {
         private static void Main(string[] args) {
             if (args.Length > 0) {
-                var bytes = File.ReadAllBytes(args[0]);
+                var filename = args.TakeLast(1);
+                var bytes = File.ReadAllBytes(filename.First());
                 Start(bytes, args.Contains("-d"));
             }
         }
