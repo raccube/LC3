@@ -1,7 +1,7 @@
 using System;
 
 namespace LC3.Instructions {
-    public class ADD : IInstruction {
+    public class AND : IInstruction {
         public void Call(Processor processor) {
             var mdr = processor[Register.MemoryData];
             var dest = (Register) (mdr >> 9 & 0b111);
@@ -23,7 +23,7 @@ namespace LC3.Instructions {
                 }
             }
 
-            processor[dest] = (ushort) (leftVal + rightVal);
+            processor[dest] = (ushort) (leftVal & rightVal);
         }
     }
 }
