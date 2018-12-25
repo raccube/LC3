@@ -9,7 +9,7 @@ namespace LC3.Instructions {
             processor[register] = (ushort) (processor[Register.PC] + (ushort)value);
 
             if (Program.Disassemble) {
-                Console.WriteLine($"LEA\t{register}, ${value:X}");
+                Console.WriteLine($"LEA\t{register}, #{value:X}");
             }
         }
     }

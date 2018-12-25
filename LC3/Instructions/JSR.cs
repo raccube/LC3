@@ -15,7 +15,7 @@ namespace LC3.Instructions {
             processor[Register.PC] = (ushort) (processor[Register.PC] + offset);
 
             if (Program.Disassemble) {
-                Console.WriteLine($"JSR\t{offset}");                
+                Console.WriteLine($"JSR\t#{offset:X}");                
             }
         }
     }

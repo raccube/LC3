@@ -11,7 +11,7 @@ namespace LC3.Instructions {
             processor.Memory[(ushort) (processor[baseR] + offset)] = processor[sr];
 
             if (Program.Disassemble) {
-                Console.WriteLine($"STR\t{sr}, {baseR}, #{offset}");
+                Console.WriteLine($"STR\t{sr}, {baseR}, #{offset:X}");
             }
         }
     }

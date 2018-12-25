@@ -10,7 +10,7 @@ namespace LC3.Instructions {
 
             processor[dest] = processor.Memory[processor[baseRegister] + offset];
             if (Program.Disassemble) {
-                Console.WriteLine($"LDR\t{dest}, {baseRegister}, #{offset}");
+                Console.WriteLine($"LDR\t{dest}, {baseRegister}, #{offset:X}");
             }
         }
     }

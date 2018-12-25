@@ -9,7 +9,7 @@ namespace LC3.Instructions {
             processor[register] = processor.Memory[processor[Register.PC] + value];
 
             if (Program.Disassemble) {
-                Console.WriteLine($"LD\t{register}, ${value:X}");
+                Console.WriteLine($"LD\t{register}, #{value:X}");
             }
         }
     }
