@@ -15,6 +15,12 @@ namespace LC3 {
 
         public void Put(ushort location, ushort value) => _memory[location] = value;
 
+        public ushort this[int key] {
+            get => this[(ushort) key];
+            set => this[(ushort) key] = value;
+        }
+
+
         public ushort this[ushort key] {
             get => Get(key);
             set => Put(key, value);
