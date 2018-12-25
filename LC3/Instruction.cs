@@ -23,6 +23,8 @@ namespace LC3 {
                     return new JSR();
                 case OpCode.STR:
                     return new STR();
+                case OpCode.ADD:
+                    return new ADD();
                 default:
                     throw new NotImplementedException($"Opcode not implemented {opcode}");
             }
