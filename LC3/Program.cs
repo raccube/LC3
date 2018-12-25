@@ -25,7 +25,8 @@ namespace LC3 {
                 return 0;
             }
 
-            Console.WriteLine("Usage: LC3 [-d] filename");
+            Console.WriteLine("Usage: LC3 [-ds] filename");
+            // TODO: Write description of flags
             return 1;
         }
 
