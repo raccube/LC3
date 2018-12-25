@@ -14,7 +14,9 @@ namespace LC3 {
 
         public static IInstruction Get(OpCode opcode) {
             var types = Assembly.GetExecutingAssembly().GetTypes();
-            return (IInstruction) Activator.CreateInstance(types.First(type => type.Name == opcode.ToString()));
+            var type = types.FirstOrDefault(t => t.Name == opcode.ToString()) ??
+                       throw new NotImplementedException($"Opcode not implemented: {opcode}");
+            return (IInstruction) Activator.CreateInstance(type);
         }
     }
 }
