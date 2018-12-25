@@ -9,8 +9,10 @@ namespace LC3.Instructions {
             var sr = (Register) (mdr << 9 & 0b0000_111);
 
             processor.Memory[(ushort) (processor[baseR] + offset)] = processor[sr];
-            
-            Console.WriteLine($"STR\t{sr}, {baseR}, #{offset}");
+
+            if (processor.Disassemble) {
+                Console.WriteLine($"STR\t{sr}, {baseR}, #{offset}");
+            }
         }
     }
 }

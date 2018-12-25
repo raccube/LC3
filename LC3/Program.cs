@@ -7,10 +7,9 @@ using System.Linq;
 namespace LC3 {
     internal static class Program {
         private static void Main(string[] args) {
-            Console.WriteLine("Hello Dög!");
             if (args.Length > 0) {
                 var bytes = File.ReadAllBytes(args[0]);
-                Start(bytes);
+                Start(bytes, args.Contains("-d"));
             }
         }
 
@@ -21,8 +20,8 @@ namespace LC3 {
                     return BitConverter.ToUInt16(i.ToArray());
                 });
         }
-        private static void Start(byte[] bytes) {
-            var proc = new Processor();
+        private static void Start(byte[] bytes, bool disassemble) {
+            var proc = new Processor(disassemble);
             var data = GetShorts(bytes).ToArray();
             
             var origin = data[0];

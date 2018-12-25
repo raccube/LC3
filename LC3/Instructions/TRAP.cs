@@ -20,8 +20,10 @@ namespace LC3.Instructions {
                 default:
                     throw new NotImplementedException($"Unknown TRAP Vector: {vector}");                    
             }
-            
-            Console.WriteLine($"TRAP\t{vector}");
+
+            if (processor.Disassemble) {
+                Console.WriteLine($"TRAP\t{vector}");
+            }
         }
     }
 }

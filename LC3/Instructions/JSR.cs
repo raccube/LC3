@@ -13,8 +13,10 @@ namespace LC3.Instructions {
             processor[Register.R7] = (ushort) (processor[Register.PC] + 1);
 
             processor[Register.PC] = (ushort) (processor[Register.PC] + offset);
-            
-            Console.WriteLine($"JSR\t{offset}");
+
+            if (processor.Disassemble) {
+                Console.WriteLine($"JSR\t{offset}");                
+            }
         }
     }
 }
