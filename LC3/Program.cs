@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using LC3.IO;
 
 namespace LC3 {
     internal static class Program {
         public static bool Disassemble;
         public static bool SuppressOutput;
+        public static IIOAdapter IoAdapter;
 
         public static bool Output => !SuppressOutput;
         
@@ -20,6 +22,7 @@ namespace LC3 {
 
                 Disassemble = flags.Contains("d");
                 SuppressOutput = flags.Contains("s");
+                IoAdapter = new ConsoleAdapter();
                 
                 Start(bytes);
                 return 0;
@@ -56,7 +59,6 @@ namespace LC3 {
                 // Fetch & Execute
                 proc.Decode(proc.Fetch()).Call(proc);
             }
-            
         }
     }
 }

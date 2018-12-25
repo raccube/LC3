@@ -12,7 +12,7 @@ namespace LC3.Instructions {
                     int i = processor[Register.R0];
                     do {
                         c = (char) processor.Memory[(ushort)i];
-                        if (Program.Output) Console.Write(c);
+                        if (Program.Output) Program.IoAdapter.Write(c);
                         i++;
                     } while (c != 0x0);
 
