@@ -10,7 +10,10 @@ namespace LC3 {
             if (args.Length > 0) {
                 var filename = args.TakeLast(1);
                 var bytes = File.ReadAllBytes(filename.First());
-                Start(bytes, args.Contains("-d"));
+                var flags = string.Join('', args.ToList().Where(a => a.StartsWith('-')));
+                flags.Remove('-');
+
+                Start(bytes, flags.Contains("d"), flags.Contains("s"));
                 return 0;
             }
 
@@ -25,8 +28,8 @@ namespace LC3 {
                     return BitConverter.ToUInt16(i.ToArray());
                 });
         }
-        private static void Start(byte[] bytes, bool disassemble) {
-            var proc = new Processor(disassemble);
+        private static void Start(byte[] bytes, bool disassemble, bool suppressOutput) {
+            var proc = new Processor(disassemble, suppressOutput);
             var data = GetShorts(bytes).ToArray();
             
             var origin = data[0];
