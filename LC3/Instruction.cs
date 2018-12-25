@@ -21,6 +21,8 @@ namespace LC3 {
                     return new TRAP();
                 case OpCode.JSR:
                     return new JSR();
+                case OpCode.STR:
+                    return new STR();
                 default:
                     throw new NotImplementedException($"Opcode not implemented {opcode}");
             }
