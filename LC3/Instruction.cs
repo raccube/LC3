@@ -27,6 +27,8 @@ namespace LC3 {
                     return new ADD();
                 case OpCode.LDR:
                     return new LDR();
+                case OpCode.AND:
+                    return new AND();
                 default:
                     throw new NotImplementedException($"Opcode not implemented {opcode}");
             }
