@@ -10,9 +10,9 @@ namespace LC3 {
             if (args.Length > 0) {
                 var filename = args.TakeLast(1);
                 var bytes = File.ReadAllBytes(filename.First());
-                var flags = string.Join('', args.ToList().Where(a => a.StartsWith('-')));
-                flags.Remove('-');
-
+                var flags = string.Join("", args.ToList().Where(a => a.StartsWith('-')))
+                    .Replace("-", "");
+                
                 Start(bytes, flags.Contains("d"), flags.Contains("s"));
                 return 0;
             }
