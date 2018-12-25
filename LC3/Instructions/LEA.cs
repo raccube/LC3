@@ -8,7 +8,7 @@ namespace LC3.Instructions {
             var value = mdr & 0b1_1111_1111;
             processor[register] = (ushort) (processor[Register.PC] + (ushort)value);
 
-            if (processor.Disassemble) {
+            if (Program.Disassemble) {
                 Console.WriteLine($"LEA\t{register}, ${value:X}");
             }
         }

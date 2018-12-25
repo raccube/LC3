@@ -12,7 +12,7 @@ namespace LC3.Instructions {
                     int i = processor[Register.R0];
                     do {
                         c = (char) processor.Memory[(ushort)i];
-                        if (processor.Output) Console.Write(c);
+                        if (Program.Output) Console.Write(c);
                         i++;
                     } while (c != 0x0);
 
@@ -21,7 +21,7 @@ namespace LC3.Instructions {
                     throw new NotImplementedException($"Unknown TRAP Vector: {vector}");                    
             }
 
-            if (processor.Disassemble) {
+            if (Program.Disassemble) {
                 Console.WriteLine($"TRAP\t{vector}");
             }
         }

@@ -8,7 +8,7 @@ namespace LC3.Instructions {
             var value = mdr & 0b1_1111_1111;
             processor[register] = processor.Memory[(ushort) (processor[Register.PC] + (ushort)value)];
 
-            if (processor.Disassemble) {
+            if (Program.Disassemble) {
                 Console.WriteLine($"LD\t{register}, ${value:X}");
             }
         }

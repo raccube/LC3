@@ -5,19 +5,11 @@ namespace LC3 {
     public class Processor {
         private readonly ushort[] _registers = new ushort[12];
         public readonly Memory Memory = new Memory();
-        public readonly bool Disassemble;
-        public readonly bool SuppressOutput;
-
-        public Processor(bool disassemble = false, bool suppressOutput = false) {
-            Disassemble = disassemble;
-            SuppressOutput = suppressOutput;
-        }
         
         public ushort GetRegister(int register) => _registers[register];
 
         public void SetRegister(int register, ushort value) => _registers[register] = value;
 
-        public bool Output => !SuppressOutput;
 
         public ushort this[int key] {
             get => GetRegister(key);
