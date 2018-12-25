@@ -4,8 +4,9 @@ namespace LC3 {
         BR = 0b0000,
         /// <summary>Add</summary>
         ADD = 0b0001,
-        /// <summary>Load</summary>
+        /// <summary>Load Direct</summary>
         LD = 0b0010,
+        /// <summary>Store Direct</summary>        
         ST = 0b0011,
         /// <summary>Jump Register</summary>
         JSR = 0b0100,
@@ -19,10 +20,11 @@ namespace LC3 {
         RTI = 0b1000,
         /// <summary>Bitwise NOT</summary>
         NOT = 0b1001,
+        /// <summary>Return from Subroutine</summary>
         RET = 0b1100,
-        /// <summary>Indirect Load</summary>
+        /// <summary>Load Indirect</summary>
         LDI = 0b1010,
-        /// <summary>Indirect Store</summary>
+        /// <summary>Store Indirect</summary>
         STI = 0b1011,
         /// <summary>Jump</summary>
         JMP = 0b1100,
