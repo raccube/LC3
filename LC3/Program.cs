@@ -6,12 +6,16 @@ using System.Linq;
 
 namespace LC3 {
     internal static class Program {
-        private static void Main(string[] args) {
+        private static int Main(string[] args) {
             if (args.Length > 0) {
                 var filename = args.TakeLast(1);
                 var bytes = File.ReadAllBytes(filename.First());
                 Start(bytes, args.Contains("-d"));
+                return 0;
             }
+
+            Console.WriteLine("Usage: LC3 [-d] filename");
+            return 1;
         }
 
         private static IEnumerable<ushort> GetShorts(byte[] bytes) {
