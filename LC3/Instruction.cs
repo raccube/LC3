@@ -1,5 +1,6 @@
 using System;
-using LC3.Instructions;
+using System.Linq;
+using System.Reflection;
 
 namespace LC3 {
     public class Instruction {
@@ -12,26 +13,8 @@ namespace LC3 {
         }
 
         public static IInstruction Get(OpCode opcode) {
-            switch (opcode) {
-                case OpCode.LD:
-                    return new LD();
-                case OpCode.LEA:
-                    return new LEA();
-                case OpCode.TRAP:
-                    return new TRAP();
-                case OpCode.JSR:
-                    return new JSR();
-                case OpCode.STR:
-                    return new STR();
-                case OpCode.ADD:
-                    return new ADD();
-                case OpCode.LDR:
-                    return new LDR();
-                case OpCode.AND:
-                    return new AND();
-                default:
-                    throw new NotImplementedException($"Opcode not implemented {opcode}");
-            }
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            return (IInstruction) Activator.CreateInstance(types.First(type => type.Name == opcode.ToString()));
         }
     }
 }
