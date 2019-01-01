@@ -6,13 +6,13 @@ using System.Linq;
 using LC3.IO;
 
 namespace LC3 {
-    internal static class Program {
+    public static class Program {
         public static bool Disassemble;
         public static bool SuppressOutput;
         public static IIOAdapter IoAdapter;
 
         public static bool Output => !SuppressOutput;
-        
+
         private static int Main(string[] args) {
             if (args.Length > 0) {
                 var filename = args.TakeLast(1);
@@ -23,7 +23,7 @@ namespace LC3 {
                 Disassemble = flags.Contains("d");
                 SuppressOutput = flags.Contains("s");
                 IoAdapter = new ConsoleAdapter();
-                
+
                 Start(bytes);
                 return 0;
             }
@@ -40,10 +40,11 @@ namespace LC3 {
                     return BitConverter.ToUInt16(i.ToArray());
                 });
         }
+
         private static void Start(byte[] bytes) {
             var proc = new Processor();
             var data = GetShorts(bytes).ToArray();
-            
+
             var origin = data[0];
 
             Debug.WriteLine($"Origin: {origin}");
