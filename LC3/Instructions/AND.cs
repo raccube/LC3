@@ -22,10 +22,10 @@ namespace LC3.Instructions {
                     Console.WriteLine($"AND\t{dest}, {sr1}, {sr2}");
                 }
             }
-
-            processor[dest] = (ushort) (leftVal & rightVal);
             
-            
+            var result = (short) (leftVal & rightVal);
+            processor[dest] = result;
+            processor[Register.Flag] = BR.MapResult(result);
         }
     }
 }

@@ -10,9 +10,9 @@ namespace LC3.Instructions {
             }
             var offset = mdr & 0b111_1111_1111;
 
-            processor[Register.R7] = (ushort) (processor[Register.PC] + 1);
+            processor[Register.R7] = (short) (processor[Register.PC] + 1);
 
-            processor[Register.PC] = (ushort) (processor[Register.PC] + offset);
+            processor[Register.PC] = (short) (processor[Register.PC] + offset);
 
             if (Program.Disassemble) {
                 Console.WriteLine($"JSR\t#{offset:X}");                

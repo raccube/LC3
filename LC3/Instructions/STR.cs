@@ -8,7 +8,7 @@ namespace LC3.Instructions {
             var baseR = (Register) (mdr >> 6 & 0b111);
             var sr = (Register) (mdr >> 9 & 0b111);
 
-            processor.Memory[(ushort) (processor[baseR] + offset)] = processor[sr];
+            processor.Memory[(ushort) (processor[baseR] + offset)] = (ushort) processor[sr];
 
             if (Program.Disassemble) {
                 Console.WriteLine($"STR\t{sr}, {baseR}, #{offset:X}");

@@ -1,5 +1,5 @@
 namespace LC3 {
-    public enum OpCode : ushort {
+    public enum OpCode : short {
         /// <summary>Branch</summary>
         BR = 0b0000,
         /// <summary>Add</summary>

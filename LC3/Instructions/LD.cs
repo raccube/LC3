@@ -6,7 +6,10 @@ namespace LC3.Instructions {
             var mdr = processor[Register.MemoryData];
             var register = (Register)(mdr >> 9 & 0b111);
             var value = mdr & 0b1_1111_1111;
-            processor[register] = processor.Memory[processor[Register.PC] + value];
+            
+            var result = (short) processor.Memory[processor[Register.PC] + value];
+            processor[register] = result;
+            processor[Register.Flag] = BR.MapResult(result);
 
             if (Program.Disassemble) {
                 Console.WriteLine($"LD\t{register}, #{value:X}");

@@ -54,7 +54,7 @@ namespace LC3 {
                 proc.Memory.Put(location, payload[i]);
             }
 
-            proc[Register.PC] = origin;
+            proc.SetRegister((int)Register.PC ,origin);
 
             while (true) {
                 // Fetch & Execute
