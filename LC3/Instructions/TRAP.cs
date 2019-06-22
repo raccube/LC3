@@ -1,10 +1,13 @@
 using System;
 
 namespace LC3.Instructions {
-    public class TRAP : IInstruction {
-        public void Call(Processor processor) {
-            var mdr = processor[Register.MemoryData];
-            var vector = (TrapVector)(mdr & 0b1111_1111);
+    public class TRAP : Instruction {
+        public TRAP(int instruction, int location) : base(instruction, location) {
+            AddArgument(ArgumentType.TrapVector, instruction & 0b1111_1111);
+        }
+
+        public override void Call(Processor processor) {
+            var vector = (TrapVector) GetArgument(0);
 
             switch (vector) {
                 case TrapVector.PutS:
@@ -19,10 +22,6 @@ namespace LC3.Instructions {
                     break;
                 default:
                     throw new NotImplementedException($"Unknown TRAP Vector: {vector}");                    
-            }
-
-            if (Program.Disassemble) {
-                Console.WriteLine($"TRAP\t{vector}");
             }
         }
     }

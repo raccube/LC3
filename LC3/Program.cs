@@ -52,13 +52,18 @@ namespace LC3 {
             for (ushort i = 0; i < payload.Length; i++) {
                 var location = (ushort) (origin + i);
                 proc.Memory.Put(location, payload[i]);
+                Console.WriteLine(((Instruction)proc.Memory.GetInstr(location)).Disassemble());
             }
 
             proc.SetRegister((int)Register.PC ,origin);
 
             while (true) {
                 // Fetch & Execute
-                proc.Decode(proc.Fetch()).Call(proc);
+                var i = proc.Fetch();
+                if (Disassemble && i != null) {
+                    Console.WriteLine(((Instruction) i).Disassemble());
+                    i.Call(proc);
+                }
             }
         }
     }

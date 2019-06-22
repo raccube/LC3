@@ -26,19 +26,10 @@ namespace LC3 {
             this[register]++;
         }
 
-        public short Fetch() {
+        public IInstruction Fetch() {
             this[Register.MemoryAddress] = this[Register.PC];
             Increment(Register.PC);
-            this[Register.MemoryData] = (short) Memory[this[Register.MemoryAddress]];
-            return this[Register.MemoryData];
+            return Memory.GetInstr(this[Register.PC] - 1);
         }
-
-        public IInstruction Decode(ushort instruction) {
-            var opcode = instruction >> 12;
-            Debug.WriteLine($"Opcode: {Convert.ToString(opcode, 2).PadLeft(4, '0')}");
-            return Instruction.Get(opcode);
-        }
-
-        public IInstruction Decode(short instruction) => Decode((ushort) instruction);
     }
 }

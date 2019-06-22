@@ -1,19 +1,18 @@
 using System;
 
 namespace LC3.Instructions {
-    public class BR : IInstruction {
-        public void Call(Processor processor) {
-            var mdr = processor[Register.MemoryData];
-            var value = mdr & 0b1_1111_1111;
-            var flags = (CondFlags) (mdr >> 9 & 0b111);
+    public class BR : Instruction {
+        public BR(int instruction, int location) : base(instruction, location) {
+            var flags = (CondFlags) (instruction >> 9 & 0b111);
+            Name += flags.GetDescription().ToLower();
+            AddArgument(ArgumentType.CondFlags, flags);
+            AddArgument(ArgumentType.PCOffset, instruction & 0b1_1111_1111);
+        }
+
+        public override void Call(Processor processor) {
             var lastResult = (CondFlags) processor[Register.Flag];
-
-            if (flags.HasFlag(lastResult)) {
-                processor[Register.PC] = (short) value;
-            }
-
-            if (Program.Disassemble) {
-                Console.WriteLine($"BR{flags.GetDescription().ToLower()}\t#{value:X}");
+            if (((CondFlags) GetArgument(0)).HasFlag(lastResult)) {
+                processor[Register.PC] = Convert.ToInt16(GetArgument(1));
             }
         }
 

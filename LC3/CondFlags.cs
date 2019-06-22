@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace LC3 {
     [Flags]
-    public enum CondFlags : short {
+    public enum CondFlags {
         [Description("")]
         None = 0,
         [Description("p")]

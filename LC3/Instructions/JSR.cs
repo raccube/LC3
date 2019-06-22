@@ -1,22 +1,20 @@
 using System;
 
 namespace LC3.Instructions {
-    public class JSR : IInstruction {
-        public void Call(Processor processor) {
-            var mdr = processor[Register.MemoryData];
-            var flag = mdr >> 11;
+    public class JSR : Instruction {
+        public JSR(int instruction, int location) : base(instruction, location) {
+            var flag = instruction >> 11;
             if ((flag & 1) == 0) {
-                throw new NotImplementedException("Yo dog you messed up");
+                Name += "R";
+                AddArgument(ArgumentType.BaseR, instruction >> 6 & 0b111);
+            } else {
+                AddArgument(ArgumentType.PCOffset, instruction & 0b111_1111_1111);
             }
-            var offset = mdr & 0b111_1111_1111;
+        }
 
+        public override void Call(Processor processor) {
             processor[Register.R7] = (short) (processor[Register.PC] + 1);
-
-            processor[Register.PC] = (short) (processor[Register.PC] + offset);
-
-            if (Program.Disassemble) {
-                Console.WriteLine($"JSR\t#{offset:X}");                
-            }
+            processor[Register.PC] = (short) (processor[Register.PC] + (int) GetArgument(0));
         }
     }
 }
